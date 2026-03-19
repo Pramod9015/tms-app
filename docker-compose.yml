@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  # ─── FastAPI Backend ─────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tms-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - AES_ENCRYPTION_KEY=${AES_ENCRYPTION_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - JWT_ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+      - REFRESH_TOKEN_EXPIRE_DAYS=7
+      - ALLOWED_ORIGINS=http://localhost:80,http://localhost:5173
+      - RATE_LIMIT_PER_MINUTE=60
+      - ADMIN_USERNAME=${ADMIN_USERNAME:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-Admin@123!}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@tms.local}
+      - DEBUG=false
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─── React Web Frontend ───────────────────────────────────────────────────
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: tms-web
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+  # ─── PostgreSQL (for local dev — use Supabase in production) ─────────────
+  db:
+    image: postgres:16-alpine
+    container_name: tms-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tms_db
+      POSTGRES_USER: tmsadmin
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-TmsSecure123!}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tmsadmin -d tms_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

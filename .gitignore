@@ -1,0 +1,36 @@
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+.venv/
+venv/
+env/
+
+# ── Environment / secrets ────────────────────────────────────────────────────
+.env
+*.env
+!.env.example
+
+# ── SQLite databases (never commit these) ───────────────────────────────────
+*.db
+*.sqlite3
+*.sqlite
+
+# ── Node / React ─────────────────────────────────────────────────────────────
+node_modules/
+web/dist/
+web/.vite/
+
+# ── IDE & OS ─────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ── Logs ──────────────────────────────────────────────────────────────────────
+*.log
+logs/
