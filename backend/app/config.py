@@ -17,6 +17,13 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite+aiosqlite:///./tms_dev.db"
 
+    @field_validator("DATABASE_URL")
+    @classmethod
+    def assemble_db_connection(cls, v: str) -> str:
+        if v.startswith("postgres://"):
+            return v.replace("postgres://", "postgresql+asyncpg://", 1)
+        return v
+
     # Encryption (Fernet / AES-256)
     AES_ENCRYPTION_KEY: str = ""  # Must be set in production
 
