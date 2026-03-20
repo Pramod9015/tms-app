@@ -272,7 +272,7 @@ export default function TransactionsPage() {
       {/* ── Add Transaction Modal ─────────────────────────────────────────── */}
       {showModal && (
         <div className="modal-overlay" onClick={e => e.target === e.currentTarget && closeModal()}>
-          <div className="modal" style={{ minWidth: 620, maxHeight: '90vh', overflowY: 'auto' }}>
+          <div className="modal" style={{ maxWidth: 620, width: '90%', maxHeight: '90vh', overflowY: 'auto' }}>
             <div className="modal-header">
               <div className="modal-title">+ Add Transaction</div>
               <button className="modal-close" onClick={closeModal}>✕</button>

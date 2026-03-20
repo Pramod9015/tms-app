@@ -65,7 +65,7 @@ function DefaultBankModal({ onClose, onImported }) {
 
   return (
     <div className="modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal" style={{ minWidth: 540, maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
+      <div className="modal" style={{ maxWidth: 540, width: '90%', maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
         <div className="modal-header">
           <div className="modal-title">🏦 Import Indian Banks</div>
           <button className="modal-close" onClick={onClose}>✕</button>
