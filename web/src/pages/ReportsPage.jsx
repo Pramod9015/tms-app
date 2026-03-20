@@ -80,7 +80,7 @@ export default function ReportsPage() {
           </div>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3" style={{ flexWrap: 'wrap' }}>
           {[
             { type: 'csv', label: '📊 Export CSV', color: 'var(--green)' },
             { type: 'excel', label: '📗 Export Excel', color: 'var(--teal)' },

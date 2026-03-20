@@ -47,7 +47,7 @@ export default function BeneficiariesPage() {
           <span style={{ color: 'var(--text-muted)', fontSize: 11, fontWeight: 400 }}>🔒 PII encrypted at rest</span>
         </div>
         <form onSubmit={submit}>
-          <div className="form-grid mb-3" style={{ gridTemplateColumns: 'repeat(2, 1fr)' }}>
+          <div className="form-grid mb-3">
 
             {/* Row 1 */}
             <div className="form-group">

@@ -369,7 +369,7 @@ export default function TransactionsPage() {
               </div>
 
               {/* ── Main fields ──────────────────────────────────────────── */}
-              <div className="form-grid mb-3" style={{ gridTemplateColumns: '1fr 1fr' }}>
+              <div className="form-grid mb-3">
 
                 <div className="form-group">
                   <label className="form-label">Amount (₹) *</label>
@@ -433,13 +433,13 @@ export default function TransactionsPage() {
                   </select>
                 </div>
 
-                <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
                   <label className="form-label">Reference / UTR</label>
                   <input className="form-input" placeholder="Reference number"
                     value={form.reference_number} onChange={e => set('reference_number', e.target.value)} />
                 </div>
 
-                <div className="form-group" style={{ gridColumn: 'span 2' }}>
+                <div className="form-group" style={{ gridColumn: '1 / -1' }}>
                   <label className="form-label">Notes 🔒 <span style={{ color: 'var(--text-muted)', fontWeight: 400, fontSize: 11 }}>(encrypted)</span></label>
                   <textarea className="form-input" rows={3} placeholder="Optional notes…"
                     value={form.notes} onChange={e => set('notes', e.target.value)} />
